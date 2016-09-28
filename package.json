@@ -1,0 +1,41 @@
+{
+  "name": "quickstart-boilerplate",
+  "version": "1.0.0",
+  "description": "Simple boilerplate to quickstart your next web project",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "node server.js",
+    "lint": "jshint **.js",
+    "js": "browserify assets/scripts/main.js > dist/main.js",
+    "css": "node-sass public/css/main.scss > public/css/main.css",
+    "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
+    "watch:js": "onchange 'app/**/*.js' -- npm run js",
+    "watch:css": "onchange 'styles/**/*.less' -- npm run css",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js --single-run"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/newaeonweb/quickstart-boilerplate.git"
+  },
+  "keywords": [
+    "npm",
+    "no gulp",
+    "no grunt",
+    "build",
+    "process",
+    "quickstart"
+  ],
+  "author": "Fernando Monterio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/newaeonweb/quickstart-boilerplate/issues"
+  },
+  "homepage": "https://github.com/newaeonweb/quickstart-boilerplate#readme",
+  "engines": {
+    "node": "6.1.0"
+  }
+}
