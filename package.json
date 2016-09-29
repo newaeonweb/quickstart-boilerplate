@@ -8,11 +8,11 @@
     "prestart": "npm install",
     "start": "node server.js",
     "lint": "jshint **.js",
-    "js": "browserify assets/scripts/main.js > dist/main.js",
-    "css": "node-sass public/css/main.scss > public/css/main.css",
+    "js": "browserify app/components/app.config.js app/components/app.js -o app/assets/js/scripts.js",
+    "css": "node-sass src/scss/style.scss --output-style compressed app/assets/css/style.css --source-map true --source-map-contents sass ",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
-    "watch:js": "onchange 'app/**/*.js' -- npm run js",
-    "watch:css": "onchange 'styles/**/*.less' -- npm run css",
+    "watch:js": "onchange 'src/scss/**/*.js' -- npm run js",
+    "watch:css": "onchange 'src/scss/**/*.scss' -- npm run css",
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js --single-run"
   },
@@ -39,10 +39,14 @@
   },
   "devDependencies": {
     "bower": "^1.7.9",
+    "browserify": "^13.1.0",
     "jasmine-core": "^2.5.2",
+    "jshint": "^2.9.3",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2"
+    "karma-jasmine": "^1.0.2",
+    "node-sass": "^3.10.0",
+    "parallelshell": "^2.0.0"
   }
 }
