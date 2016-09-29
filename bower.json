@@ -1,0 +1,28 @@
+{
+  "name": "quickstart-boilerplate",
+  "description": "Simple boilerplate to quickstart your next web project",
+  "main": "index.js",
+  "authors": [
+    "Fernando Monterio"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "npm",
+    "no",
+    "gulp",
+    "no",
+    "grunt",
+    "build",
+    "process",
+    "quickstart"
+  ],
+  "homepage": "https://github.com/newaeonweb/quickstart-boilerplate",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
