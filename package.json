@@ -8,7 +8,7 @@
     "prestart": "npm install",
     "start": "node server.js",
     "lint": "jshint **.js",
-    "js": "browserify app/components/app.config.js app/components/app.js -o app/assets/js/scripts.js",
+    "js": "browserify app/app.js -o app/assets/js/scripts.js",
     "css": "node-sass src/scss/style.scss --output-style compressed app/assets/css/style.css --source-map true --source-map-contents sass ",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
     "watch:js": "onchange 'src/scss/**/*.js' -- npm run js",
@@ -38,15 +38,25 @@
     "node": "6.1.0"
   },
   "devDependencies": {
+    "body-parser": "^1.15.2",
     "bower": "^1.7.9",
     "browserify": "^13.1.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
     "jasmine-core": "^2.5.2",
     "jshint": "^2.9.3",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
+    "morgan": "^1.7.0",
     "node-sass": "^3.10.0",
-    "parallelshell": "^2.0.0"
+    "parallelshell": "^2.0.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.3.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
   }
 }

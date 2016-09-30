@@ -8,19 +8,19 @@
 	* Configutation of the app
 	*/
 	angular
-		.module('modulename')
+		.module('app')
 		.config(configure)
 		.run(runBlock);
 
-	configure.$inject = ['$urlRouterProvider'];
+	configure.$inject = ['$urlRouterProvider', '$locationProvider'];
 
-	function configure($urlRouterProvider) {
+	function configure($urlRouterProvider, $locationProvider) {
 
 		//$locationProvider.hashPrefix('!');
-		//$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode(true);
 
 		$urlRouterProvider
-			.otherwise('/login');
+			.otherwise('/');
 
 	}
 
