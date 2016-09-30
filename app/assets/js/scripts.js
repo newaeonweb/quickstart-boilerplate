@@ -55,7 +55,7 @@
 
 	angular
 		.module('app', [ 'ui.router' ]);
-
+		// Import custom configuration
 		require('./app.config.js');
 
 })();

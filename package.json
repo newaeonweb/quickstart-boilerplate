@@ -11,7 +11,7 @@
     "js": "browserify app/app.js -o app/assets/js/scripts.js",
     "css": "node-sass src/scss/style.scss --output-style compressed app/assets/css/style.css --source-map true --source-map-contents sass ",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
-    "watch:js": "onchange 'src/scss/**/*.js' -- npm run js",
+    "watch:js": "onchange 'app/**/*.js' -- npm run js",
     "watch:css": "onchange 'src/scss/**/*.scss' -- npm run css",
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js --single-run"
