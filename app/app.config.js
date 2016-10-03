@@ -1,10 +1,11 @@
 'use strict';
-
-module.exports = function ($urlRouterProvider, $locationProvider) {
+// Routes and others providers
+module.exports = function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 	
-	//$locationProvider.hashPrefix('!');
-	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
+	//$locationProvider.html5Mode(true);
 
-		$urlRouterProvider
-			.otherwise('/');
+	$urlRouterProvider
+		.otherwise('/');
+	
 };
