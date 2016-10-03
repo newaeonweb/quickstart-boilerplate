@@ -31,11 +31,21 @@ require('./components/home');
 // Setup initial config and route	
 app.config(require('./app.config'));
 	
-},{"../package.json":17,"./app.config":1,"./components/home":5,"angular":16,"angular-animate":7,"angular-aria":9,"angular-resource":11,"angular-sanitize":13,"angular-ui-router":14}],3:[function(require,module,exports){
+},{"../package.json":18,"./app.config":1,"./components/home":6,"angular":17,"angular-animate":8,"angular-aria":10,"angular-resource":12,"angular-sanitize":14,"angular-ui-router":15}],3:[function(require,module,exports){
 'use strict';
 
-module.exports = function($scope) {
-    $scope.test = "teste"
+module.exports = function($scope, HomeService) {
+    $scope.results = [];
+    $scope.test = 'fuck yeah'
+
+    
+    // Get the results from API using a service.
+		HomeService.get('2015').then(function (data){
+			$scope.results = data.MRData.RaceTable.Races;
+            console.log($scope.results);
+		}, function (error){
+			console.log(error);
+		});
   
 };
 },{}],4:[function(require,module,exports){
@@ -53,12 +63,32 @@ module.exports = function ($stateProvider) {
 },{"./homeCtrl":3}],5:[function(require,module,exports){
 'use strict';
 
+module.exports = function ($http, $q) {
+	return {
+			get: function (year) {
+				var deferred = $q.defer();
+				$http.jsonp('http://ergast.com/api/f1/' + year + '/results.json?limit=400&offset=0&callback=JSON_CALLBACK')
+					.success(function (data) {
+						deferred.resolve(data);
+
+					}).error(function (error) {
+						deferred.reject(error);
+					});
+
+				return deferred.promise;
+			}
+		}
+};
+},{}],6:[function(require,module,exports){
+'use strict';
+
 var app = require('angular').module('app');
 
 app.controller('HomeCtrl', require('./homeCtrl'));
+app.service('HomeService', require('./homeService'));
 app.config(require('./homeRoute'));
 
-},{"./homeCtrl":3,"./homeRoute":4,"angular":16}],6:[function(require,module,exports){
+},{"./homeCtrl":3,"./homeRoute":4,"./homeService":5,"angular":17}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4199,11 +4229,11 @@ angular.module('ngAnimate', [], function initAngularHelpers() {
 
 })(window, window.angular);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 require('./angular-animate');
 module.exports = 'ngAnimate';
 
-},{"./angular-animate":6}],8:[function(require,module,exports){
+},{"./angular-animate":7}],9:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -4610,11 +4640,11 @@ ngAriaModule.directive('ngShow', ['$aria', function($aria) {
 
 })(window, window.angular);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 require('./angular-aria');
 module.exports = 'ngAria';
 
-},{"./angular-aria":8}],10:[function(require,module,exports){
+},{"./angular-aria":9}],11:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -5479,11 +5509,11 @@ angular.module('ngResource', ['ng']).
 
 })(window, window.angular);
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 require('./angular-resource');
 module.exports = 'ngResource';
 
-},{"./angular-resource":10}],12:[function(require,module,exports){
+},{"./angular-resource":11}],13:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -6223,11 +6253,11 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 
 })(window, window.angular);
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 require('./angular-sanitize');
 module.exports = 'ngSanitize';
 
-},{"./angular-sanitize":12}],14:[function(require,module,exports){
+},{"./angular-sanitize":13}],15:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.3.1
@@ -10804,7 +10834,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -42573,11 +42603,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":15}],17:[function(require,module,exports){
+},{"./angular":16}],18:[function(require,module,exports){
 module.exports={
   "name": "quickstart-boilerplate",
   "version": "1.0.0",

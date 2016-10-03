@@ -2,13 +2,4 @@
 
 // Import Botstrap
 @import "vendor/bootstrap";
-
-//
-body {
-  padding-top: 25rem;
-}
-.starter-template {
-  padding: 3rem 1.5rem;
-  text-align: left;
-  @include clearfix
-}
+@import "shared";
