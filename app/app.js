@@ -1,23 +1,27 @@
-(function () {
-	'use strict';
-	//require('es5-shim');
-	//require('es5-sham');
+'use strict';
 
-	var angular = require('angular');
-	require('angular-ui-router');
+var angular = require('angular');
+require('angular-ui-router');
 
-	/**
-	* @ngdoc index
-	* @name app
-	* @description
-	* # app
-	*
-	* Main modules of the application.
-	*/
+var app = angular.module('app', [ 'ui.router' ]);
 
-	angular
-		.module('app', [ 'ui.router' ]);
-		// Import custom configuration
-		require('./app.config.js');
+app.constant('VERSION', require('../package.json').version);
 
-})();
+require('./components/home');
+	
+app.config(function($urlRouterProvider, $locationProvider, $stateProvider) {
+	//$locationProvider.hashPrefix('!');
+	$locationProvider.html5Mode(true);
+
+	$urlRouterProvider
+		.otherwise('/');
+
+	$stateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: './components/home/home-tpl.html',
+			controller: 'HomeCtrl',
+			controllerAs: 'vm'
+		});	
+});
+	

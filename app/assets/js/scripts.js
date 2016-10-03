@@ -1,66 +1,46 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function () {
-	'use strict';
-	/**
-	* @ngdoc configuration file
-	* @name app.config:config
-	* @description
-	* # Config and run block
-	* Configutation of the app
-	*/
-	angular
-		.module('app')
-		.config(configure)
-		.run(runBlock);
+'use strict';
 
-	configure.$inject = ['$urlRouterProvider', '$locationProvider'];
+var angular = require('angular');
+require('angular-ui-router');
 
-	function configure($urlRouterProvider, $locationProvider) {
+var app = angular.module('app', [ 'ui.router' ]);
 
-		//$locationProvider.hashPrefix('!');
-		$locationProvider.html5Mode(true);
+app.constant('VERSION', require('../package.json').version);
 
-		$urlRouterProvider
-			.otherwise('/');
+require('./components/home');
+	
+app.config(function($urlRouterProvider, $locationProvider, $stateProvider) {
+	//$locationProvider.hashPrefix('!');
+	$locationProvider.html5Mode(true);
 
-	}
+	$urlRouterProvider
+		.otherwise('/');
 
-	runBlock.$inject = [];
+	$stateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: './components/home/home-tpl.html',
+			controller: 'HomeCtrl',
+			controllerAs: 'vm'
+		});	
+});
+	
+},{"../package.json":7,"./components/home":3,"angular":6,"angular-ui-router":4}],2:[function(require,module,exports){
+'use strict';
 
-	function runBlock() {
-		'use strict';
+module.exports = function($scope) {
+    $scope.test = "teste"
+  
+};
+},{}],3:[function(require,module,exports){
+'use strict';
 
-		//console.log('AngularJS run() function...');
-	}
+var app = require('angular').module('app');
 
-})();
-
-},{}],2:[function(require,module,exports){
-(function () {
-	'use strict';
-	//require('es5-shim');
-	//require('es5-sham');
-
-	var angular = require('angular');
-	require('angular-ui-router');
-
-	/**
-	* @ngdoc index
-	* @name app
-	* @description
-	* # app
-	*
-	* Main modules of the application.
-	*/
-
-	angular
-		.module('app', [ 'ui.router' ]);
-		// Import custom configuration
-		require('./app.config.js');
-
-})();
-
-},{"./app.config.js":1,"angular":5,"angular-ui-router":3}],3:[function(require,module,exports){
+app.controller('HomeCtrl', require('./homeCtrl'));
+//app.config('HomeRoute', require('./homeRoute'));
+},{"./homeCtrl":2,"angular":6}],4:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.3.1
@@ -4637,7 +4617,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -36406,8 +36386,72 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":4}]},{},[2]);
+},{"./angular":5}],7:[function(require,module,exports){
+module.exports={
+  "name": "quickstart-boilerplate",
+  "version": "1.0.0",
+  "description": "Simple boilerplate to quickstart your next web project",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "node server.js",
+    "lint": "jshint **.js",
+    "js": "browserify app/app.js -o app/assets/js/scripts.js",
+    "css": "node-sass src/scss/style.scss --output-style compressed app/assets/css/style.css --source-map true --source-map-contents sass ",
+    "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
+    "watch:js": "onchange 'app/**/*.js' -- npm run js",
+    "watch:css": "onchange 'src/scss/**/*.scss' -- npm run css",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/newaeonweb/quickstart-boilerplate.git"
+  },
+  "keywords": [
+    "npm",
+    "no gulp",
+    "no grunt",
+    "build",
+    "process",
+    "quickstart"
+  ],
+  "author": "Fernando Monterio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/newaeonweb/quickstart-boilerplate/issues"
+  },
+  "homepage": "https://github.com/newaeonweb/quickstart-boilerplate#readme",
+  "engines": {
+    "node": "6.1.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
+    "browserify": "^13.1.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "jasmine-core": "^2.5.2",
+    "jshint": "^2.9.3",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "morgan": "^1.7.0",
+    "node-sass": "^3.10.0",
+    "parallelshell": "^2.0.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.3.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}
+
+},{}]},{},[1]);
