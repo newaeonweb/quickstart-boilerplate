@@ -11,22 +11,15 @@ app.constant('VERSION', require('../package.json').version);
 require('./components/home');
 	
 app.config(function($urlRouterProvider, $locationProvider, $stateProvider) {
-	//$locationProvider.hashPrefix('!');
-	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
+	//$locationProvider.html5Mode(true);
 
 	$urlRouterProvider
 		.otherwise('/');
 
-	$stateProvider
-		.state('home', {
-			url: '/',
-			templateUrl: './components/home/home-tpl.html',
-			controller: 'HomeCtrl',
-			controllerAs: 'vm'
-		});	
 });
 	
-},{"../package.json":7,"./components/home":3,"angular":6,"angular-ui-router":4}],2:[function(require,module,exports){
+},{"../package.json":8,"./components/home":4,"angular":7,"angular-ui-router":5}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope) {
@@ -36,11 +29,34 @@ module.exports = function($scope) {
 },{}],3:[function(require,module,exports){
 'use strict';
 
+module.exports = function ($stateProvider) {
+	$stateProvider
+		.state('home', {
+			url: '/home',
+			templateUrl: './components/home/home-tpl.html',
+			controller: require('./homeCtrl'),
+			controllerAs: 'vm'
+		})
+};
+},{"./homeCtrl":2}],4:[function(require,module,exports){
+'use strict';
+
 var app = require('angular').module('app');
 
 app.controller('HomeCtrl', require('./homeCtrl'));
-//app.config('HomeRoute', require('./homeRoute'));
-},{"./homeCtrl":2,"angular":6}],4:[function(require,module,exports){
+app.config(require('./homeRoute'));
+// Set Home route
+// app.config(function($urlRouterProvider, $locationProvider, $stateProvider) {
+
+// 	$stateProvider
+// 		.state('home', {
+// 			url: '/home',
+// 			templateUrl: './components/home/home-tpl.html',
+// 			controller: 'HomeCtrl',
+// 			controllerAs: 'vm'
+// 		});	
+// });
+},{"./homeCtrl":2,"./homeRoute":3,"angular":7}],5:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.3.1
@@ -4617,7 +4633,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -36386,11 +36402,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":5}],7:[function(require,module,exports){
+},{"./angular":6}],8:[function(require,module,exports){
 module.exports={
   "name": "quickstart-boilerplate",
   "version": "1.0.0",

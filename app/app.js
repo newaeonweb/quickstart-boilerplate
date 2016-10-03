@@ -10,18 +10,11 @@ app.constant('VERSION', require('../package.json').version);
 require('./components/home');
 	
 app.config(function($urlRouterProvider, $locationProvider, $stateProvider) {
-	//$locationProvider.hashPrefix('!');
-	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
+	//$locationProvider.html5Mode(true);
 
 	$urlRouterProvider
 		.otherwise('/');
 
-	$stateProvider
-		.state('home', {
-			url: '/',
-			templateUrl: './components/home/home-tpl.html',
-			controller: 'HomeCtrl',
-			controllerAs: 'vm'
-		});	
 });
 	

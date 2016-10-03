@@ -3,9 +3,9 @@
 module.exports = function ($stateProvider) {
 	$stateProvider
 		.state('home', {
-			url: '/',
-			templateUrl: 'app/components/home/home-tpl.html',
-			controller: 'HomeCtrl',
+			url: '/home',
+			templateUrl: './components/home/home-tpl.html',
+			controller: require('./homeCtrl'),
 			controllerAs: 'vm'
 		})
 };
