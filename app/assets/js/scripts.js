@@ -36,8 +36,7 @@ app.config(require('./app.config'));
 
 module.exports = function($scope, HomeService) {
     $scope.results = [];
-    $scope.test = 'fuck yeah'
-
+    $scope.test = 'Quickstart Boilerplate'
     
     // Get the results from API using a service.
 		HomeService.get('2015').then(function (data){
@@ -65,19 +64,18 @@ module.exports = function ($stateProvider) {
 
 module.exports = function ($http, $q) {
 	return {
-			get: function (year) {
-				var deferred = $q.defer();
-				$http.jsonp('http://ergast.com/api/f1/' + year + '/results.json?limit=400&offset=0&callback=JSON_CALLBACK')
-					.success(function (data) {
-						deferred.resolve(data);
+		get: function (year) {
+			var deferred = $q.defer();
+			$http.jsonp('http://ergast.com/api/f1/' + year + '/results.json?limit=400&offset=0&callback=JSON_CALLBACK')
+				.success(function (data) {
+					deferred.resolve(data);
 
-					}).error(function (error) {
-						deferred.reject(error);
-					});
-
+				}).error(function (error) {
+					deferred.reject(error);
+				});
 				return deferred.promise;
 			}
-		}
+	}
 };
 },{}],6:[function(require,module,exports){
 'use strict';
@@ -87,7 +85,6 @@ var app = require('angular').module('app');
 app.controller('HomeCtrl', require('./homeCtrl'));
 app.service('HomeService', require('./homeService'));
 app.config(require('./homeRoute'));
-
 },{"./homeCtrl":3,"./homeRoute":4,"./homeService":5,"angular":17}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8

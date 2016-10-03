@@ -2,8 +2,7 @@
 
 module.exports = function($scope, HomeService) {
     $scope.results = [];
-    $scope.test = 'fuck yeah'
-
+    $scope.test = 'Quickstart Boilerplate'
     
     // Get the results from API using a service.
 		HomeService.get('2015').then(function (data){
